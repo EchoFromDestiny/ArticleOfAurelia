@@ -446,60 +446,66 @@
             text-decoration: underline;
         }
 
-        /* 文章底部导航 */
-        #post-nav-bottom {
-            display: grid;
-            justify-content: space-between; /* 左、中、右三栏 */
-            align-items: center;
-            gap: 16px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            background: transparent !important;  /*直接设置透明，显示父元素背景*/
-            backdrop-filter: none !important;/*去掉模糊效果*/
-        }
-
-       /* 左侧：上一篇 */
-       #post-nav-bottom .nav-btn:first-child {
-           justify-self: start;   /* 左对齐 */
-           text-align: left;
+        /* 文章底部导航 - 用绝对定位实现完美居中 */
+       #post-nav-bottom {
+           position: relative;  /* 作为定位参考 */
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-top: 30px;
+           padding-top: 20px;
+           border-top: 1px solid #e0e0e0;
+           background: transparent !important;
+           backdrop-filter: none !important;
        }
        
-       /* 中间：返回上一级 */
-       #post-nav-bottom .nav-btn:nth-child(2) {
-           justify-self: center;  /* 居中 */
+       /* 中间按钮：绝对定位，真正居中 */
+       #post-nav-bottom #back-to-level {
+           position: absolute;
+           left: 50%;
+           transform: translateX(-50%);
+           color: #888;
            text-align: center;
        }
        
-       /* 右侧：下一篇 */
-       #post-nav-bottom .nav-btn:last-child {
-           justify-self: end;     /* 右对齐 */
-           text-align: right;
+       #post-nav-bottom #back-to-level:hover {
+           color: #1a0dab;
        }
-        
-            #post-nav-bottom .nav-btn {
-                  color: #1a0dab;
-                  cursor: pointer;
-                  font-size: 15px;
-                  padding: 6px 16px;
-                  border: 1px solid #ddd;
-                  background: rgba(255, 255, 255, 0.6);
-                  transition: 0.15s;
-                  border-radius: 2px;
-                  white-space: nowrap;
-                  flex-shrink: 0;  /* 防止按钮被压缩 */
-              }
-
-        #post-nav-bottom .nav-btn:hover {
-            background: #eee;
-            text-decoration: underline;
-        }
-
-        #post-nav-bottom .nav-btn.disabled {
-            color: #ccc;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
+       
+       /* 左侧按钮：正常左对齐 */
+       #post-nav-bottom #prev-article {
+           margin-right: auto;
+       }
+       
+       /* 右侧按钮：正常右对齐 */
+       #post-nav-bottom #next-article {
+           margin-left: auto;
+       }
+       
+       /* 按钮通用样式 */
+       #post-nav-bottom .nav-btn {
+           color: #1a0dab;
+           cursor: pointer;
+           font-size: 15px;
+           padding: 6px 16px;
+           border: 1px solid #ddd;
+           background: rgba(255, 255, 255, 0.6);
+           transition: 0.15s;
+           border-radius: 0;
+           white-space: nowrap;
+           flex-shrink: 0;
+       }
+       
+       #post-nav-bottom .nav-btn:hover {
+           background: #eee;
+           text-decoration: underline;
+       }
+       
+       #post-nav-bottom .nav-btn.disabled {
+           color: #ccc;
+           cursor: not-allowed;
+           pointer-events: none;
+       }
         /* 加载小圈（简洁环状） */
         .loader {
             width: 36px;
